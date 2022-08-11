@@ -10,7 +10,7 @@ class User(Base):
     email = Column(String, unique=True, index=True)
     hashed_password = Column(String)
     is_active = Column(Boolean, default=True)
-
+    # relationship 속성을 이용하여 다른 테이블의 값에 포함시켜 준다.
     items = relationship("Item", back_populates="owner")
 
 
@@ -21,5 +21,5 @@ class Item(Base):
     title = Column(String, index=True)
     description = Column(String, index=True)
     owner_id = Column(Integer, ForeignKey("users.id"))
-
+    # relationship 속성을 이용하여 다른 테이블의 값에 포함시켜 준다.
     owner = relationship("User", back_populates="items")

@@ -4,12 +4,13 @@ from sqlalchemy.orm import Session
 from . import models, crud, schemas
 from .database import SessionLocal, engine
 
+# 디비 테이블 생성
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
 
-# Dependency
+# 종속성 생성 단일 요청에 사용될 SQLAchemy 세션 생성하고, 요청완료시 세션 종료
 def get_db():
     db = SessionLocal()
     try:
@@ -17,7 +18,7 @@ def get_db():
     finally:
         db.close()
 
-
+# 요청받을 모델을 schemas.User로하여 유효성 검사를 진행
 @app.post("/users/", response_model=schemas.User)
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     db_user = crud.get_user_by_email(db, email=user.email)
@@ -25,7 +26,7 @@ def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail="Email already registered")
     return crud.create_user(db=db, user=user)
 
-
+# objects.get.all()인 경우 리스트
 @app.get("/users/", response_model=list[schemas.User])
 def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     users = crud.get_users(db, skip=skip, limit=limit)
@@ -46,7 +47,7 @@ def create_item_for_user(
 ):
     return crud.create_user_item(db=db, item=item, user_id=user_id)
 
-
+# objects.get.all()인 경우 리스트
 @app.get("/items/", response_model=list[schemas.Item])
 def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     items = crud.get_items(db, skip=skip, limit=limit)
