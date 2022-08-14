@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'prefetch_related',
+    'select_related',
 ]
 
 MIDDLEWARE = [

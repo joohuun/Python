@@ -17,3 +17,9 @@ class Pizza(models.Model):
             self.name,
             ", ".join(topping.name for topping in self.toppings.all()),
         )
+
+# 모든 토핑들을 읽어 온다.
+pizza = Pizza.objects.all()   
+
+# 캐시를 미리 저장하여 피자가 가지고 있는 토핑만 읽어 온다.    
+pizza = Pizza.objects.prefetch_related('toppings')
