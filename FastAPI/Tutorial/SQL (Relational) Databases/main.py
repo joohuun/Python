@@ -1,8 +1,8 @@
 from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session
-
-from . import models, crud, schemas
-from .database import SessionLocal, engine
+from app import models, crud, schemas
+# from . import models, crud, schemas
+from app.database import SessionLocal, engine
 
 # 디비 테이블 생성
 models.Base.metadata.create_all(bind=engine)
