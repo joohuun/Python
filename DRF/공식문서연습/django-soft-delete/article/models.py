@@ -8,13 +8,3 @@ class Article(SoftDeleteModel):
     # Following fields will be added automatically
     # is_deleted
     # deleted_at
-    
-    # Following managers will be added automatically
-    # objects = SoftDeleteManager()
-    # deleted_objects = DeletedManager()
-
-
-# For inherited model
-
-# class Post(SoftDeleteModel, SomeParentModelClass):
-#     title = models.CharField(max_length=100)
