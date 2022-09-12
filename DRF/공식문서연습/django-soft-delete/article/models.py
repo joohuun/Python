@@ -1,5 +1,5 @@
 from django.db import models
-from django_softdelete.models import SoftDeleteModel, SoftDeleteManager
+from django_softdelete.models import SoftDeleteModel
 
 
 class Article(SoftDeleteModel):
