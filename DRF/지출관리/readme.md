@@ -4,49 +4,16 @@
 
 ## ERD
 ![ERD.png](/screenshot/지출관리ERD.png)
-```
-Table "user_user" {
-  "id" bigint(20) [pk, not null, increment]
-  "last_login" datetime(6) [default: NULL]
-  "email" varchar(100) [not null]
-  "username" varchar(20) [not null]
-  "password" varchar(128) [not null]
-  "is_active" tinyint(1) [not null]
-  "is_admin" tinyint(1) [not null]
-  "is_superuser" tinyint(1) [not null]
-}
 
-Table "expenditure" {
-  "id" bigint(20) [pk, not null, increment]
-  "dec" longtext [not null]
-  "amount" int(11) [not null]
-  "date" date [not null]
-  "is_active" tinyint(1) [not null]
-  "category_id" bigint(20) [ref: > category.id, not null]
-  "user_id" bigint(20) [ref: > user_user.id, not null]
-}
-
-Table "category" {
-  "id" bigint(20) [pk, not null, increment]
-  "name" varchar(50) [not null]
-}
-
-Table "comment" {
-  "id" bigint(20) [pk, not null, increment]
-  "comment" longtext [not null]
-  "expenditure_id" bigint(20) [ref: > expenditure.id, default: NULL]
-  "user_id" bigint(20) [ref: > user_user.id, default: NULL] 
-}
-```
 ## .env 파일 manage.py와 동일 위치
 - 실행시 필요한 환경 변수 설정 파일
 ```
 SECRET_KEY='payhere_secret_key'
 
-DB_ROOT_PASSWORD=payhere
-DB_DATABASE=payhere
-DB_USER=payhere
-DB_PASSWORD=payhere
+MYSQL_ROOT_PASSWORD='root_password'
+MYSQL_DATABASE='dbname'
+MYSQL_USER='unsername'
+MYSQL_PASSWORD='password'
 ```
 
 ## local, python==3.10
