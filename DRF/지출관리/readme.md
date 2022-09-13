@@ -1,13 +1,12 @@
 ## API 명세서 [https://documenter.getpostman.com/view/20867321/VUxNT8tp](https://documenter.getpostman.com/view/20867321/VUxNT8tp)
 
-![API.png](/API.png)
+![API.png](/screenshot/지출관리API.png)
 
 ## ERD, [DDL](https://github.com/joohuun/payhere/blob/main/payhere_ddl.sql)   
 > - 로컬에서는 sqlite를 사용하여 개발   
 > - Docker는 mysql=5.7 사용하여 배포   
 
-![ERD.png](/ERD.png)
-![ERD.png](/Python/DRF/지출관리/static/ERD.png)
+![ERD.png](/screenshot/지출관리ERD.png)
 ```
 Table "user_user" {
   "id" bigint(20) [pk, not null, increment]
