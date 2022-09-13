@@ -1,6 +1,6 @@
 ## API 명세서 [https://documenter.getpostman.com/view/20867321/VUxNT8tp](https://documenter.getpostman.com/view/20867321/VUxNT8tp)
 
-![payhere_api.png](/static/API.png)
+![API.png](/static/API.png)
 
 ## ERD, [DDL](https://github.com/joohuun/payhere/blob/main/payhere_ddl.sql)   
 > - 로컬에서는 sqlite를 사용하여 개발   
