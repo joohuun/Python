@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+
+  backend:
+    build: .
+    command: sh -c "python manage.py collectstatic --no-input && python manage.py migrate && gunicorn --bind 0.0.0.0:8000 payhere.wsgi:application"
+    ports:
+      - 8000:8000
+    working_dir: /srv/docker-server/
+    volumes:
+      - ./:/srv/docker-server/
+    env_file:
+      - ./.env
+    restart: always
+    depends_on:
+      - mysql
+
+  nginx:
+    image: nginx
+    container_name: nginx
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./static/:/static
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: always
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql_service
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
