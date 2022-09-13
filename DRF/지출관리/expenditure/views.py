@@ -35,8 +35,8 @@ class ExpenditureView(APIView):
         return Response(serializer.errors, status=400)
     
     def put(self, request, pk):
-        expenditures = Expenditure.objects.get(pk=pk)
-        serializer = ExpenditureSerializer(expenditures ,data=request.data, partial=True)
+        expenditure = Expenditure.objects.get(pk=pk)
+        serializer = ExpenditureSerializer(expenditure, data=request.data, partial=True)
         
         if serializer.is_valid():
             serializer.save()
@@ -51,33 +51,21 @@ class ExpenditureView(APIView):
         return Response("삭제 완료!!")
     
     
-# soft-delete
-class ExpenditureDeleteView(APIView):
+# 소프트 삭제
+class ExpenditureSoftDeleteView(APIView):
     permission_classes = [permissions.IsAuthenticated]
     authentication_classes=[JWTAuthentication]
     
-    # def put(self, request, pk):
-    #     expenditures = Expenditure.objects.get(pk=pk)
-        
-    #     if expenditures.is_active == False:
-    #         expenditures.is_active = True
-    #         expenditures.save()
-    #         return Response("복구 완료!!")
-    #     else:
-    #         expenditures.is_active = False
-    #         expenditures.save()
-    #         return Response("숨김 완료!!")
-        
-    def patch(self, request, pk, *args):
+    def patch(self, request, pk):
         expenditures = Expenditure.objects.get(pk=pk)
-        
-        if expenditures.is_deleted == True:
-            expenditures.restore()
+        if expenditures.is_active == False:
+            expenditures.is_active = True
+            expenditures.save()
             return Response("복구 완료!!")
         else:
-            # expenditures.deleted_at.remove()
-            expenditures.delete()
-            return Response("삭제 완료!!")
+            expenditures.is_active = False
+            expenditures.save()
+            return Response("소프트 삭제 완료!!")
     
     
 class ExpenditureDetailView(APIView):
@@ -104,7 +92,7 @@ class ExpenditureDetailView(APIView):
     
     def put(self, request, pk):
         user = request.user
-        detail = detail.objects.get(pk=pk)
+        detail = ExpenditureDetail.objects.get(pk=pk)
         request.data['detail'] = request.data['detail']
         if detail.user == user:
             serializer = ExpenditureDetailSerializer(detail, data=request.data, partial=True)
@@ -117,7 +105,7 @@ class ExpenditureDetailView(APIView):
     
     def delete(self, request, pk):
         user = request.user
-        detail = detail.objects.get(pk=pk)
+        detail = ExpenditureDetail.objects.get(pk=pk)
         if detail.user == user:
             detail.delete()
             return Response("삭제 완료!!",status=200)
