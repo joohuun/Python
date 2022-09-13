@@ -2,6 +2,9 @@
 
 ![API.png](/screenshot/지출관리API.png)
 
+## 아키텍쳐
+![아키텍쳐](/screenshot/아키텍쳐.
+
 ## ERD
 ![ERD.png](/screenshot/지출관리ERD.png)
 
