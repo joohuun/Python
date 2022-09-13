@@ -7,7 +7,7 @@
 > - Docker는 mysql=5.7 사용하여 배포   
 
 ![ERD.png](/ERD.png)
-![ERD.png](/static/ERD.png)
+![ERD.png](/Python/DRF/지출관리/static/ERD.png)
 ```
 Table "user_user" {
   "id" bigint(20) [pk, not null, increment]
