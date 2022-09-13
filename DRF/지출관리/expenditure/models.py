@@ -6,7 +6,7 @@ class SoftDeleteManager(models.Manager):
     use_for_related_fields = True  # 옵션은 기본 매니저로 이 매니저를 정의한 모델이 있을 때 이 모델을 가리키는 모든 관계 참조에서 모델 매니저를 사용할 수 있도록 한다.
 
     def get_queryset(self):
-        return super().get_queryset().filter(is_deleted=False)
+        return super().get_queryset().filter(deleted_at__isnull=True)
     
     
 class SoftDeleteModel(models.Model):
@@ -23,7 +23,7 @@ class SoftDeleteModel(models.Model):
     #    self.deleted_at = timezone.now()
     #    self.save(update_fields=['deleted_at'])
 
-   def restore(self,  *args, **kwargs):  # 삭제된 레코드를 복구한다.
+   def restore(self,):  # 삭제된 레코드를 복구한다.
        self.is_deleted == False
        self.save
     #    self.deleted_at = None
