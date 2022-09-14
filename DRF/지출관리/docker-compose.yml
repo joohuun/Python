@@ -4,7 +4,7 @@ services:
 
   backend:
     build: .
-    command: sh -c "python manage.py collectstatic --no-input && python manage.py migrate && gunicorn --bind 0.0.0.0:8000 payhere.wsgi:application"
+    command: sh -c "python manage.py collectstatic --no-input && python manage.py migrate && gunicorn --bind 0.0.0.0:8000 project.wsgi:application"
     ports:
       - 8000:8000
     working_dir: /srv/docker-server/
