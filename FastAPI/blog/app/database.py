@@ -12,7 +12,7 @@ engine = create_engine(
     # echo = True,
 )
 # 세션로컬 클래스 생성
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False,)
 
 # 베이스 클래스 생성
 Base = declarative_base()

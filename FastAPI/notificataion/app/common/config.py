@@ -11,12 +11,13 @@ class Config:
     BASE_DIR = base_dir
     DB_POOL_RECYCLE: int = 900
     DB_ECHO: bool = True
-    DB_URL: str = "mysql+pymysql://root:5781@localhost:3306/testdb?charset=utf8"
 
 
 @dataclass
 class LocalConfig(Config):
     PROJ_RELOAD: bool = True
+    DB_URL: str = "mysql+pymysql://root:5781@localhost:3306/testdb?charset=utf8"
+
     
 
 @dataclass
