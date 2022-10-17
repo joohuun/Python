@@ -1,8 +1,8 @@
 from fastapi import APIRouter
-from app import database, schemas, models
-from app.crud import user
+from blog import database, schemas, models
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, status
+from blog.repository import user
 
 router = APIRouter(
     prefix="/user",
