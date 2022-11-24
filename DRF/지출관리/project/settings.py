@@ -24,7 +24,9 @@ env = environ.Env(
 
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
-SECRET_KEY = os.environ['SECRET_KEY']
+# SECRET_KEY = os.environ['SECRET_KEY']
+
+SECRET_KEY = 'django-insecure-t(3(ub)h=0scvbgoa+c0a=o)m-__t(0+1vl(_+5)+4xs#59)_j'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -88,28 +90,28 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 # MYSQL_ROOT_PASSWORD: env("MYSQL_ROOT_PASSWORD")
-MYSQL_DATABASE = env("MYSQL_DATABASE")
-MYSQL_USER = env("MYSQL_USER")
-MYSQL_PASSWORD = env("MYSQL_PASSWORD")
+# MYSQL_DATABASE = env("MYSQL_DATABASE")
+# MYSQL_USER = env("MYSQL_USER")
+# MYSQL_PASSWORD = env("MYSQL_PASSWORD")
 
-# Mysql 셋팅
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': MYSQL_DATABASE,
-        'USER': MYSQL_USER,
-        'PASSWORD': MYSQL_PASSWORD,
-        'HOST': 'localhost',
-        'PORT': '3306',
-    }
-}
-
+# # Mysql 셋팅
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': MYSQL_DATABASE,
+#         'USER': MYSQL_USER,
+#         'PASSWORD': MYSQL_PASSWORD,
+#         'HOST': 'localhost',
+#         'PORT': '3306',
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
