@@ -11,6 +11,7 @@ class CategoryNode(DjangoObjectType):
         model = Category
         filter_fields = ['name', 'ingredients']
         interfaces = (relay.Node, )
+    
 
 class IngredientNode(DjangoObjectType):
     class Meta:
