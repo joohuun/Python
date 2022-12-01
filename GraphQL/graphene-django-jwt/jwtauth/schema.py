@@ -22,10 +22,10 @@ schema = graphene.Schema(query=Query, mutation=Mutation)
 
 
 
-class CreateArticle(graphene.Mutation):
-    class Arguments:
-        title = 
+# class CreateArticle(graphene.Mutation):
+#     class Arguments:
+#         title = 
 
 
-    class Meta:
-        model = 
+#     class Meta:
+#         model = 
