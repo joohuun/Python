@@ -2,7 +2,6 @@ from django.db import models
 from ..account.models import User
 from ..models import BaseModel
 # Create your models here.
-
 class Article(BaseModel):
     
     class Meta:
@@ -20,8 +19,7 @@ class Like(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
 
-
-class Comment(BaseModel):
+class Comment(BaseModel): 
     class Meta:
         db_table = "댓글"
 

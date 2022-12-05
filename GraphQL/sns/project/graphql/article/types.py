@@ -1,19 +1,20 @@
-from article.models import Article, Comment, Like
+from ...article import models
 from graphene_django import DjangoObjectType
+from graphene import relay
 
 class ArticleType(DjangoObjectType):
     class Meta:
-        model = Article
+        model = models.Article
         fields = "__all__"
 
 
 class CommentType(DjangoObjectType):
     class Meta:
-        model = Comment
+        model = models.Comment
         fields = "__all__"
 
 
 class LikeType(DjangoObjectType):
     class Meta:
-        model = Like
+        model = models.Like
         fields = "__all__"
