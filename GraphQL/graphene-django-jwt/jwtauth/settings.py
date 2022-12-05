@@ -41,12 +41,12 @@ INSTALLED_APPS = [
     'graphql_auth',
     'django_filters',
 
-    'user',
+    'account',
     'article',
 ]
 
 #############################################################
-AUTH_USER_MODEL = 'user.User'
+AUTH_USER_MODEL = 'account.User'
 
 GRAPHENE = {
     "SCHEMA": "jwtauth.schema.schema",
@@ -74,7 +74,6 @@ GRAPHQL_JWT = {
         "graphql_auth.mutations.ObtainJSONWebToken",
     ],
 }
-
 #############################################################
 
 MIDDLEWARE = [

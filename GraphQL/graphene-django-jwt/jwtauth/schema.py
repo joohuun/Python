@@ -10,6 +10,41 @@ class AuthMutation(graphene.ObjectType):
     verify_account = mutations.VerifyAccount.Field()
     token_auth = mutations.ObtainJSONWebToken.Field()
 
+'''
+    mutation {
+        register (
+            email: "test12@gmail.com"
+            username: "teset12"
+            password1: "1q2w3e!!"
+            password2: "1q2w3e!!"
+        ) {
+            success
+            errors
+            token
+        } 
+    }
+
+    mutation {
+        verifyAccount (
+        token: "토큰값"
+        ) {
+        success
+        errors
+        }
+    }
+
+    mutation {
+        tokenAuth(
+            email: "test12@gmail.com"
+            password: "1q2w3e!!") {
+            user {
+                id
+                username
+                email
+            }
+        }
+    }
+'''
 
 class Query(MeQuery, graphene.ObjectType):
     pass
@@ -22,10 +57,3 @@ schema = graphene.Schema(query=Query, mutation=Mutation)
 
 
 
-# class CreateArticle(graphene.Mutation):
-#     class Arguments:
-#         title = 
-
-
-#     class Meta:
-#         model = 

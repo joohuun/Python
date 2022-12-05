@@ -17,17 +17,27 @@ class AccountRegisterInput(graphene.InputObjectType):
         required=False,
     )
 
-# class AccountRegister(graphene.Mutation):
-#     class Arguments:
-#         input = AccountRegisterInput(
-#             description="Fields required to create a user", required=True
-#         )
+class AccountRegister(graphene.Mutation):
+    class Arguments:
+        input = AccountRegisterInput(
+            description="Fields required to create a user", required=True
+        )
 
-#     ok = graphene.Boolean()
+    requires_confirmation = graphene.Boolean(
+        description = "informs,,,"
+    )
 
-#     class Meta:
-#         model = User
+    class Meta:
+        description = "Register a new user."
+        exclude = ["password"]
+        model = User
+        # error_type_class = AccountError
+        error_type_field = "account_errors"
 
-#     @classmethod
-#     def mutate(cls, info, email, username):
-        
+    @classmethod
+    def mutate(cls, root, info, **data):
+        response = super().mutate(root, info, **data)
+        response.requires_confirmation = True
+        return response
+
+

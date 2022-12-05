@@ -1,24 +1,52 @@
 import graphene
 from graphene_django import DjangoObjectType
 from .models import Restaurant
+from django_graphene_permissions import PermissionDjangoObjectType, permissions_checker
+from django_graphene_permissions.permissions import IsAuthenticated
 
-class RestaurantType(DjangoObjectType):
+
+class RestaurantType(PermissionDjangoObjectType):
     class  Meta:
         model = Restaurant
         fields = ("id", "name", "address")
 
+    @staticmethod
+    def permission_classes():
+        return [IsAuthenticated]
+
         
 class Query(graphene.ObjectType):
     """
-    Queries for the Restaurant model
+    query {
+        restaurants {
+            id
+            name
+            address
+        }
+    }
     """
     restaurants = graphene.List(RestaurantType)
 
-    def resolve_resaurants(self, info, **kwargs):
+    def resolve_restaurants(self, info, **kwargs):
         return Restaurant.objects.all()
     
 
 class CreateRestaurant(graphene.Mutation):
+    """
+    mutation {
+        createRestaurant (
+            name: "gkgk"
+            address: "ghgh"
+            ) {
+            ok 
+            restaurant {
+                id
+                name
+                address
+            }
+        } 
+    }
+    """
     class Arguments:
         name = graphene.String()
         address = graphene.String()
@@ -26,6 +54,7 @@ class CreateRestaurant(graphene.Mutation):
     ok = graphene.Boolean()
     restaurant = graphene.Field(RestaurantType)
 
+    # @permissions_checker([IsAuthenticated])
     def mutate(self, info, name, address):
         restaurant = Restaurant(name=name, address=address)
         restaurant.save()
@@ -33,6 +62,13 @@ class CreateRestaurant(graphene.Mutation):
     
 
 class DeleteRestaurant(graphene.Mutation):
+    """
+    mutation {
+        deleteRestaurant (id:25) {
+            ok
+        }
+    }   
+    """
     class Arguments:
         id = graphene.Int()
     
@@ -45,6 +81,22 @@ class DeleteRestaurant(graphene.Mutation):
     
 
 class UpdateRestaurant(graphene.Mutation):
+    """
+    mutation {
+        updateRestaurant (
+            id: 23
+            name: "gkgasdasdk"
+            address: "qweirufkjlsdkja"
+            ) {
+            ok
+            restaurant {
+                id
+                name
+                address
+            }
+        }
+    }
+    """
     class Arguments:
         id = graphene.Int()
         name = graphene.String()
@@ -67,3 +119,5 @@ class Mutation(graphene.ObjectType):
     update_restaurant = UpdateRestaurant.Field()
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
+
+

@@ -211,3 +211,7 @@ LANGUAGES = [
     ("zh-hans", "Simplified Chinese"),
     ("zh-hant", "Traditional Chinese"),
 ]
+
+
+# If enabled, make sure you have set proper storefront address in ALLOWED_CLIENT_HOSTS.
+ENABLE_ACCOUNT_CONFIRMATION_BY_EMAIL = True

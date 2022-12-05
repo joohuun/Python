@@ -1,3 +1,6 @@
+from typing import Union
+from decimal import Decimal
+
 from django.db import models
 from django.db.models import Q, QuerySet
 from django.utils import timezone
@@ -9,7 +12,7 @@ from django.contrib.auth.models import (
     Permission,  
     PermissionsMixin,
     )
-from permissions import AccountPermissions, BasePermissionEnum, get_permissions
+from .permissions import AccountPermissions, BasePermissionEnum, get_permissions
 
 class UserManager(BaseUserManager):
     def create_user(
@@ -101,18 +104,18 @@ class User(PermissionsMixin, AbstractBaseUser):
         # Drop cache for authentication backend
         self._effective_permissions_cache = None
 
-    def get_full_name(self):
-        if self.first_name or self.last_name:
-            return f"{self.first_name} {self.last_name}".strip()
-        if self.default_billing_address:
-            first_name = self.default_billing_address.first_name
-            last_name = self.default_billing_address.last_name
-            if first_name or last_name:
-                return f"{first_name} {last_name}".strip()
-        return self.email
+    # def get_full_name(self):
+    #     if self.first_name or self.last_name:
+    #         return f"{self.first_name} {self.last_name}".strip()
+    #     if self.default_billing_address:
+    #         first_name = self.default_billing_address.first_name
+    #         last_name = self.default_billing_address.last_name
+    #         if first_name or last_name:
+    #             return f"{first_name} {last_name}".strip()
+    #     return self.email
 
-    def get_short_name(self):
-        return self.email
+    # def get_short_name(self):
+    #     return self.email
 
     def has_perm(self, perm: Union[BasePermissionEnum, str], obj=None):  # type: ignore
         # This method is overridden to accept perm as BasePermissionEnum
