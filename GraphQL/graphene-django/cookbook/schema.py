@@ -3,23 +3,23 @@ import graphene
 # from graphene import relay
 # from graphene_django import DjangoObjectType
 # from graphene_django.filter import DjangoFilterConnectionField
-# from ingredients.models import Category, Ingredient
+from ingredients.models import Category, Ingredient
 
-import ingredients.schema
-# DjangoObjectType으로 Django model들과 매핑시킴, GraphQL 필드를 자동으로 정의 해줌
+# import ingredients.schema
+# # DjangoObjectType으로 Django model들과 매핑시킴, GraphQL 필드를 자동으로 정의 해줌
 # class CategoryType(DjangoObjectType):
 #     class Meta:
 #         model = Category
 #         fields = ("id", "name", "ingredients")
 
-# 
+
 # class IngredientType(DjangoObjectType):
 #     class Meta:
 #         model = Ingredient
 #         fields = ("id", "name", "notes", "category")
 
 
-# DRF 에서 APIView의 역할
+# # DRF 에서 APIView의 역할
 # class Query(graphene.ObjectType):
 #     all_ingredients = graphene.List(IngredientType)
 #     category_by_name = graphene.Field(CategoryType, name=graphene.String(required=True))

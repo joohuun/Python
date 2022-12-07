@@ -21,17 +21,23 @@ from graphene_django.filter import DjangoFilterConnectionField
 
 class ArticleQueries(MeQuery, graphene.ObjectType):
     all_articles = graphene.List(ArticleType)
+    comments = graphene.List(CommentType)
+    likes = graphene.List(LikeType)
     article_detail = graphene.Field(
-        ArticleType,
+        ArticleType, 
         id = graphene.Argument(graphene.ID, required=True)
     )
-    comment = graphene.List(CommentType, id=graphene.Int())
-    like = graphene.List(LikeType, id=graphene.Int())
-
-
+    comment = graphene.Field(CommentType, id=graphene.Int())
+    like = graphene.Field(LikeType, id=graphene.Int())
 
     def resolve_all_articles(self, info):
         return models.Article.objects.all()
+
+    def resovle_comments(self, info):
+        return models.Comment.objects.all()
+
+    def resolve_lies(self, info):
+        return models.Like.objects.all()
 
     def resolve_article_detail(self, info, id):
         return models.Article.objects.get(pk=id)
@@ -42,8 +48,9 @@ class ArticleQueries(MeQuery, graphene.ObjectType):
     def resolve_like(self, info, id):
         return models.Like.objects.get(pk=id)
 
-    
 
+
+    
 class ArticleMutation(graphene.ObjectType):
     create_article = CreateArticle.Field()
     update_aritlce = UpdateArticle.Field()

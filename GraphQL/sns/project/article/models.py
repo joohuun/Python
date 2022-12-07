@@ -25,4 +25,5 @@ class Comment(BaseModel):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    is_active = models.BooleanField(default=True)
     body = models.TextField()
