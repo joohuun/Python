@@ -1,6 +1,7 @@
 import graphene
 from ...account import models
 from ...article import models
+from graphene import ObjectType
 
 from graphql_auth import mutations
 # from article.types import ArticleType
@@ -19,7 +20,7 @@ from graphql_auth.schema import MeQuery
 from graphene import relay
 from graphene_django.filter import DjangoFilterConnectionField
 
-class ArticleQueries(MeQuery, graphene.ObjectType):
+class ArticleQueries(MeQuery, ObjectType):
     all_articles = graphene.List(ArticleType)
     comments = graphene.List(CommentType)
     likes = graphene.List(LikeType)
