@@ -17,6 +17,6 @@ urlpatterns = [
             )
         ),
     ),
-    path("playground", csrf_exempt(GraphQLPlaygroundView.as_view(endpoint="/graphql"))),
+    path("playground", csrf_exempt(GraphQLPlaygroundView.as_view(endpoint="graphql"))),
     path("__debug__/", include(debug_toolbar.urls)),
 ]

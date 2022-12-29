@@ -30,3 +30,52 @@ class ArticleNode(DjangoObjectType):
         user = info.context.user
 
         return article_loader.load((user, root)).get()["favorites_count"]
+
+
+class CommentNode(DjangoObjectType):
+    class Meta:
+        model = models.Comment
+        exclude = ()
+        interfaces = (Node, )
+
+        
+
+
+###############
+# Input Type  #
+###############
+
+class ArticleCreateInputType:
+    title = String(required=True)
+    slug = String(required=True)
+    description =String(required=True)
+    body = String(required=True)
+    tags = List(String)
+
+
+class ArticleUpdateInputType:
+    slug = String(required=True)
+    title = String()
+    description = String()    
+    body = String()
+
+class ArticleDeleteInputType:
+    slug = String(requried=True)
+
+
+class CommentCreateInputType:
+    body = String(required=True)
+    article_slug = String(required=True)
+
+
+class CommentUpdateInputType:
+    comment_id = ID(requried=True)
+    body = String(required=True)
+
+
+class CommentDeleteInputType:
+    comment_id = ID(requried=True)
+
+
+class FavoriteInputType:
+    article_slug = String(required=True)

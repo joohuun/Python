@@ -15,10 +15,11 @@ class Article(BaseModel):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="articles")
 
 
+
 class Comment(BaseModel):
     body = models.TextField()
     article = models.ForeignKey(
-        Article, related_name="comments", on_delete=models.CASCADE
+        Article, on_delete=models.CASCADE
     )
     author = models.ForeignKey(User, related_name="comments", on_delete=models.CASCADE)
 

@@ -1,6 +1,8 @@
 from graphene_federation import build_schema
 from .user.schema import UserMutation, UsersQueries
 from .blog.schema import ArticleQueries
+from .blog.schema import ArticleMutation
+
 
 
 
@@ -13,6 +15,8 @@ class Query(
 
 class Mutation(
     UserMutation,
+    ArticleMutation,
+
 ):
     pass
 
