@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package article;
+
+message ArticleRequest {
+  string id = 1;
+}
+
+message ArticleResponse {
+  string title = 1;
+  string content = 2;
+}
+
+service ArticleService {
+  rpc GetArticle(ArticleRequest) returns (ArticleResponse);
+}
