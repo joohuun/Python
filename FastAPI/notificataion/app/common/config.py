@@ -16,7 +16,7 @@ class Config:
 @dataclass
 class LocalConfig(Config):
     PROJ_RELOAD: bool = True
-    DB_URL: str = "mysql+pymysql://root:5781@localhost:3306/testdb?charset=utf8"
+    DB_URL: str = "mysql+pymysql://test:test@localhost:3306/testdb?charset=utf8"
 
     
 
