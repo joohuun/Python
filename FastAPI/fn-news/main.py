@@ -3,6 +3,9 @@
 # from pymongo import MongoClient
 # import pymongo
 import uvicorn
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # host 파일에 hostname 등록했을 경우 사용가능 아래3개 다사용가능
 # client = MongoClient('mongodb://mongo1:27017,mongo2:27018,mongo3:27018/?replicaSet=fn-replicaset')

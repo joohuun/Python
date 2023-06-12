@@ -23,9 +23,11 @@ from pymongo import MongoClient
 import bcrypt
 import smtplib
 from email.message import EmailMessage
+import os
+
 
 # MongoDB connection
-client = MongoClient("mongodb://localhost:27017")
+client = MongoClient(os.environ.get('MONGODB_URI'))
 db = client["mydatabase"]
 users_collection = db["users"]
 

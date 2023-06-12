@@ -11,19 +11,26 @@ import jwt
 from email.message import EmailMessage
 from fastapi.param_functions import Form
 
-from env import (
-    smtp_email,
-    smtp_pw,
-    ALGORITHM,
-    JWT_SECRET_KEY,
-    MONGO_URI
-)
+# from env import (
+#     smtp_email,
+#     smtp_pw,
+#     ALGORITHM,
+#     JWT_SECRET_KEY,
+#     MONGO_URI
+# )
 
+import os
 
 app = FastAPI()
 
+JWT_SECRET_KEY=os.environ.get('JWT_SECRET_KEY')
+ALGORITHM=os.environ.get('ALGORITHM')
+smtp_email=os.environ.get('SMTP_EMAIL')
+smtp_pw=os.environ.get('SMTP_PW')
+
+
 # MongoDB setup
-client = MongoClient(MONGO_URI)
+client = MongoClient(os.environ.get("MONGO_URI"))
 db = client['mydatabase']
 users_collection = db['users']
 
