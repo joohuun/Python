@@ -18,7 +18,6 @@ class ArticleFavoriteDataLoader(DataLoader):
             .annotate(favorited=Exists(models.FavoriteArticles.objects.filter(user=user, article_id=OuterRef("pk"))),
                 favorites_count=Count("favorites")).values("favorited", "favorites_count")
         )
-        print("tkestlsjflkjleji")
         return Promise.resolve(favorites)
 
 
